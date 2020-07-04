@@ -35,6 +35,7 @@
 #include <Array.h>
 #include <ArrayDef.h>
 #include <Box.h>
+#include <Span.h>
 #include <Types.h>
 #include <Vec.h>
 
@@ -635,6 +636,9 @@ void computePolygons(
 // or a quadrilateral, containing indices referring to the positions array,
 // and triangles are represented by having their last index be "noPoint" (above,
 // namely ~size_t(0), or the unsigned equivalent of -1).
+// All of the quads generated are convex, so they can be trivially triangulated
+// in either direction (i.e. 0,1,2 and 0,2,3, or 0,1,3 and 1,2,3), if triangle-only
+// results are needed.
 template<typename FUNCTOR>
 void createSurface(
 	const Box3d& box,
